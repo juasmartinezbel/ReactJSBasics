@@ -20,7 +20,7 @@ class App extends Component {
   	const {children}=this.props;
     return (
       <div className="App">
-        <Header title="Codejobs Owo" items={items} />
+        <Header title="Codejobs Uwu" items={items} />
         <Content body={children}/>
         <Footer copyright="&copy; Codejobs 2018"/>
       </div>
