@@ -1,10 +1,19 @@
+//Depdendencies
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+import {BrowserRouter as Router} from 'react-router-dom';
+// import {BrowserRouter} from 'react-router-dom'; si solo se quiere usar BrowserRouter
+
+// Routes
+import AppRoutes from './routes';
+
+//Assets
 import './index.css';
 
 ReactDOM.render(
-  <App />,
+  <Router>
+  	<AppRoutes/>
+  </Router>,
   document.getElementById('root')
 );
 
