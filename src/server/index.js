@@ -9,6 +9,9 @@ import open from 'open';
 // Webpack Configuration
 import webpackConfig from "../../webpack.config.babel";
 
+// API
+import blogApi from './api/blog';
+
 // Server Port
 const port = process.env.PORT || 3000;
 
@@ -30,6 +33,9 @@ if (isDevelopment) {
   app.use(webpackDevMiddleware(webpackCompiler));
   app.use(webpackHotMiddleware(webpackCompiler));
 }
+
+//API Dispatch 
+app.use('/api/blog', blogApi);
 
 //  Sending all traffic to React
 app.get('*', (req, res) => {
