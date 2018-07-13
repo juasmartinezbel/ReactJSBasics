@@ -7,28 +7,38 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import open from 'open';
 
 // Webpack Configuration
-import webpackConfig from '../../webpack.config.dev';
+import webpackConfig from "../../webpack.config.babel";
 
 // Server Port
-const port = 3000;
+const port = process.env.PORT || 3000;
+
+// Environment 
+const isDevelopment = process.env.NODE_ENV !== 'production';
+console.log('isDevelopmen:',isDevelopment);
 
 // Express app
 const app = express();
 
+// Public 
+app.use(express.static(path.join(__dirname, '../public')));
+
 // Webpack Compiler
 const webpackCompiler = webpack(webpackConfig);
 
-app.use(webpackDevMiddleware(webpackCompiler));
-app.use(webpackHotMiddleware(webpackCompiler));
+if (isDevelopment) {
+  // Webpack Middlewares
+  app.use(webpackDevMiddleware(webpackCompiler));
+  app.use(webpackHotMiddleware(webpackCompiler));
+}
 
-// Sending all the traffic to React
+//  Sending all traffic to React
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
+  res.sendFile(path.join(__dirname, '../public/index.html'))
 });
 
-// Listen port 3000
+// Listen port
 app.listen(port, err => {
-  if (!err) {
+  if(!err) {
     open(`http://localhost:${port}`);
   }
-});
+})
